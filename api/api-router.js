@@ -7,8 +7,14 @@ const router = express.Router();
 router.use(express.json());
 
 router.get("/", (req, res) => {
-  const messageOfTheDay = process.env.MOTD || "Hello World!";
-  res.status(200).json({ message: messageOfTheDay });
+  Shout.find()
+    .then(shout => {
+      const messageOfTheDay = process.env.MOTD || "Hello World!";
+      res.status(200).json({ message: messageOfTheDay, shout });
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
 });
 
 router.get("/shouts", (req, res, next) => {

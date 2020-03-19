@@ -7,7 +7,7 @@ const router = express.Router();
 router.use(express.json());
 
 router.get("/", (req, res) => {
-  Shout.find()
+  Shouts.find()
     .then(shout => {
       const messageOfTheDay = process.env.MOTD || "Hello World!";
       res.status(200).json({ message: messageOfTheDay, shout });
